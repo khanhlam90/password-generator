@@ -56,6 +56,9 @@ header {
 
 .card-footer {
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card-footer::before {
@@ -79,7 +82,7 @@ header {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
   color: hsl(0, 0%, 100%);
-  display: inline-block;
+  /*display: inline-block; */
   font-size: 22px;
   line-height: 22px;
   margin: 16px 16px 16px 20px;
@@ -123,6 +126,7 @@ button[disabled] {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
+    flex: 100%;
   }
 
   #password {
@@ -133,5 +137,6 @@ button[disabled] {
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
+    flex: 100%;
   }
 }

@@ -1,114 +1,139 @@
-// Assignment code here
+// Assign user's input variables:
+var promptLength;
+var promptNumberConfirm;
+var promptUpperConfirm;
+var promptLowerConfirm;
+var promptSpecialConfirm;
 
-// Get random number - numbers 0 to 9 are respectively in order from 48-57 in the Browser Character Set:
-var getRandomNumber = function() {
-  return String.fromCharCode(Math.floor(Math.random()*10)+ 48);
-};
-
-// Get random upper-case letters - letter A to Z are respectively in order from 65 to 90 in the Browser Character Set:
-var getRandomUpper = function() {
-  return String.fromCharCode(Math.floor(Math.random()*26)+ 65);
-};
-
-// Get random lower-case letters - letter a to z are respectively in order from 97 to 122 in the Browser Character Set:
-var getRandomLower = function() {
-  return String.fromCharCode(Math.floor(Math.random()*26)+ 97);
-};
-
-// Get random special charaters - refer to the README file for details:
-var getRandomSymbol = function() {
-  const symbols = '!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\'';
-  return symbols[Math.floor(Math.random() * symbols.length)];
-};
-
-console.log(
-  "random number is " + getRandomNumber(),
-  "random upper-case letter is " + getRandomUpper(),
-  "random lower-case letter is " + getRandomLower(),
-  "random special character is " + getRandomSymbol(),
-);
-
-var passwordElements = function(){
-
-// function to get password length
-  var getPasswordLength = function () {  
-      
-      promptLength = Number(window.prompt("Please enter the number of charaters (from 8 to 128) for your password."));
-    
-      if (promptLength === "" || promptLength === null || isNaN(promptLength) || promptLength<8 || promptLength>128) {
-        
-      window.alert("Your input was invalid! Please try again.");
-
-      return getPasswordLength();
-      
-      } else {
-      alert("You have indicated that you'd like " + promptLength + " characters for your password.");
-      }
-      console.log("You would like to have "+ promptLength + " characters for your password.");
-  }
-
-  // function to get upper-case characters confirmation
-  var getNumberConfirm = function() {
-    promptNumberConfirm = window.confirm("Would you like your password to contain 'numeric' characters?");
-    //    if (promptNumberConfirm) {
-    //   window.alert("Yes! Number characters will be more secured.");
-    // } else {
-    //   window.alert("Not a problem! Numeric characters will not be in your password.");
-    // }
-  }
-
-  // function to get upper-case characters confirmation
-  var getUpperConfirm = function() {
-    promptUpperConfirm = window.confirm("Would you like your password to contain 'UPPER-CASE' chacraters?");
-    // if (promptUpperConfirm) {
-    //   window.alert("Ok! 'UPPER-CASE' characters will be included.");
-    // } else {
-    //   window.alert("Alright! NO UPPER-CASE characters for your password.");
-    // }
-  }
-
-  // function to get lower-case characters confirmation
-  var getLowerConfirm = function() {
-    promptLowerConfirm = window.confirm("Would you like your password to contain 'lower-case' characters?");
-    // if (promptLowerConfirm) {
-    //   window.alert("Ok! Your password WILL contain 'lower-case' characters.");
-    // } else {
-    //   window.alert("Alright! NO lower-case characters for your password.");
-    // }
-  }
-
-  // function to get special characters confirmation
-  var getSpecialConfirm = function() {
-    promptSpecialConfirm = window.confirm("Would you like your password to contain 'special' characters? such as *, +, !, $");
-    // if (promptSpecialConfirm) {
-    //   window.alert("Good choice! Special characters are recommended and will be contained in your password.");
-    // } else {
-    //   window.alert("No problem! Special characters are excluded.");
-    // }
-  }
-
-  getPasswordLength();
-  getNumberConfirm();
-  getUpperConfirm();
-  getLowerConfirm();
-  getSpecialConfirm();
-
-};
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+// List of variables number, upper-case, lower-case and special charaters:
+var numberChar = "0123456789";
+var upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowerChar = "abcdefghijklmnopqrstuvwxyz";
+var specialChar = '!\xa0"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\'';
 
 // Write password to the #password input
 function writePassword() {
+  // function to get password length
+  var getPasswordLength = function () {  
+      
+    promptLength = parseInt(window.prompt("Please enter the number of charaters (from 8 to 128) for your password length."));
   
-  passwordElements();
+    if (promptLength === "" || promptLength === null || isNaN(promptLength) || promptLength<8 || promptLength>128) {
+      
+    window.alert("Your input was invalid! Please try again.");
 
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+    return getPasswordLength();
+    
+    } else {
+    window.alert("Please select AT LEAST ONE of the following criteria:");
+    }
+  };
+   
+  // function to get password criteria
+  var generatePassword = function(){
+    // function to get upper-case characters confirmation
+        promptNumberConfirm = window.confirm("Would you like your password to contain 'numeric' characters?");
 
-  passwordText.value = password;
+    // function to get upper-case characters confirmation
+        promptUpperConfirm = window.confirm("Would you like your password to contain 'UPPER-CASE' chacraters?");
 
-}
+    // function to get lower-case characters confirmation
+      promptLowerConfirm = window.confirm("Would you like your password to contain 'lower-case' characters?");
+  
+    // function to get special characters confirmation
+      promptSpecialConfirm = window.confirm("Would you like your password to contain 'special' characters? such as *, +, !, $");
+    
+    if (!promptNumberConfirm && !promptUpperConfirm && !promptLowerConfirm && !promptSpecialConfirm){
+      window.alert("You would need to select AT LEAST ONE of the criteria (Number, Upper, Lower or Special characters).");
+      return generatePassword();
+    } 
 
+    // else if - if user confirms all 4 password criteria:
+    else if (promptNumberConfirm && promptUpperConfirm && promptLowerConfirm && promptSpecialConfirm) {
+      tempoPassword = numberChar.concat(upperChar,lowerChar,specialChar);
+    }
+
+    // else if - if user confirms 3 out 4 password criteria:
+    else if (promptNumberConfirm && promptUpperConfirm && promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = numberChar.concat (upperChar, lowerChar);
+    }
+    else if (promptNumberConfirm && promptUpperConfirm && !promptLowerConfirm && promptSpecialConfirm){
+      tempoPassword = numberChar.concat(upperChar, specialChar);
+    }
+    else if (promptNumberConfirm && !promptUpperConfirm && promptLowerConfirm && promptSpecialConfirm) {
+      tempoPassword = numberChar.concat(lowerChar, specialChar);
+    }
+    else if (!promptNumberConfirm && promptUpperConfirm && promptLowerConfirm && promptSpecialConfirm) {
+      tempoPassword = upperChar.concat(lowerChar, specialChar);
+    }
+
+    // else if - if user confirms 2 out 4 password criteria:
+    else if (promptNumberConfirm && promptUpperConfirm && !promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = numberChar.concat (upperChar);
+    }
+    else if (promptNumberConfirm && !promptUpperConfirm && promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = numberChar.concat (lowerChar);
+    }
+    else if (promptNumberConfirm && !promptUpperConfirm && !promptLowerConfirm && promptSpecialConfirm){
+      tempoPassword = numberChar.concat (specialChar);
+    }
+    else if (!promptNumberConfirm && promptUpperConfirm && promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = upperChar.concat (lowerChar);
+    }
+    else if (!promptNumberConfirm && promptUpperConfirm && !promptLowerConfirm && promptSpecialConfirm){
+      tempoPassword = upperChar.concat (specialChar);
+    }
+    else if (!promptNumberConfirm && !promptUpperConfirm && promptLowerConfirm && promptSpecialConfirm){
+      tempoPassword = lowerChar.concat (specialChar);
+    }
+
+    // else if - if user confirms 1 out 4 password criteria:
+    else if (promptNumberConfirm && !promptUpperConfirm && !promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = numberChar;
+    }
+    else if (!promptNumberConfirm && promptUpperConfirm && !promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = upperChar;
+    }
+    else if (!promptNumberConfirm && !promptUpperConfirm && promptLowerConfirm && !promptSpecialConfirm){
+      tempoPassword = lowerChar;
+    }
+    else if (!promptNumberConfirm && !promptUpperConfirm && !promptLowerConfirm && promptSpecialConfirm){
+      tempoPassword = specialChar;
+    }
+  };
+  getPasswordLength();
+  generatePassword();
+
+  // let assign the password as an array for the length of password to be generated:
+   var password = [];
+  
+  //generate random password based on length and criteria above:
+    for (var i=0; i<promptLength; i++) {
+      var randomPassword = tempoPassword [Math.floor(Math.random()*tempoPassword.length)];
+      password.push(randomPassword);
+    }
+    //combine the charaters and convert it to string
+    var passwordText = password.join("");
+    finalPassword(passwordText);
+      
+    // text content to assign password text into the placeholder field
+    function finalPassword(passwordText) {
+      document.getElementById("password").textContent = passwordText;
+    };
+
+  // for user's convenience, added copy to clipboard button
+  // Get references to the #copy element
+  var copyBtn = document.querySelector("#copy");
+  // Add event listener to copy button and copy value to clipboard:
+  copyBtn.addEventListener("click", copyPassword);
+  function copyPassword () {
+    clipboardText = document.getElementById("password").value;
+    navigator.clipboard.writeText(clipboardText);
+  };
+};
+
+
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
