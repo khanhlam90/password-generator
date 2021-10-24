@@ -3,9 +3,9 @@
 ## Purpose
 A website that allows user to randomly generate secure passwords. The user can choose to have the following criteria for their passwords:
 * Length of at least 8 characters and no more than 128 characters.
-* Ability to choose to have at least one of the following chracter types:
+* Ability to choose to have at least one of the following character types:
     - uppercase, 
-    - lower, 
+    - lowercase, 
     - numeric, and/or 
     - special characters.
 
