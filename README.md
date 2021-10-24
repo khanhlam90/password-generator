@@ -4,10 +4,10 @@
 A website that allows user to randomly generate secure passwords. The user can choose to have the following criteria for their passwords:
 * Length of at least 8 characters and no more than 128 characters.
 * Ability to choose to have at least one of the following chracter types:
-** uppercase, 
-** lower, 
-** numeric, and/or 
-** special characters.
+    - uppercase, 
+    - lower, 
+    - numeric, and/or 
+    - special characters.
 
 
 ## Built With
@@ -33,4 +33,4 @@ Self-Built and online-research (such as https://stackoverflow.com/ and https://w
 ![Screenshot-08](./assets/images/ss8.png)
 
 ### Notes
-Sample screenshots demonstrate the selection of 25 character password length, and is selected to have all the character types.
+Sample screenshots above demonstrate the selection of 25-character password length, and is selected to have all the character types.
